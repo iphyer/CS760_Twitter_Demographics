@@ -21,6 +21,11 @@ for Twitter_id,Twitter_num in userTwitterNum.items():
     if (Twitter_num < 10):
         data_reduce = data_reduce[data_reduce.user_id != Twitter_id]
 
+
 # Output the number of valid users
-#userTwitterNum2 = data_reduce["user_id"].value_counts()
- 
+userTwitterNumGT10 = data_reduce["user_id"].value_counts().to_dict()
+
+with open('user_idGT10_2522.csv', 'w') as f:
+    [f.write('{0},{1}\n'.format(key, value)) for key, value in userTwitterNumGT10.items()]
+
+data_reduce.to_csv('louis_tweets_1119_reduce.csv', header=True, encoding = "ISO-8859-1")
