@@ -1,4 +1,4 @@
-key,user_id,user_account,user_name,user_follower,user_tweet_count,user_location,user_profile_image,user_start_time,user_fname,user_lname,user_mname,gender
+user_key,user_id,user_account,user_name,user_follower,user_tweet_count,user_location,user_profile_image,user_start_time,user_fname,user_lname,user_mname,gender
 1,76,marciadorsey,Marcia Dorsey,2321,26581,"The City of St. Louis, MO...",https://pbs.twimg.com/profile_images/463480478713282560/CXvHMQ2P_normal.jpeg,4/3/2006,marcia,dorsey,,F
 2,71903,thorpus,Justin Thorp,4802,29493,"St Louis, MO",https://pbs.twimg.com/profile_images/378800000859065151/21tZtmUl_normal.jpeg,12/15/2006,justin,thorp,,M
 3,718343,DbleTrble,michelle perdue,170,11726,In my skin,https://pbs.twimg.com/profile_images/460222291826077697/4NRJIQnN_normal.jpeg,1/28/2007,michelle,perdue,,F
