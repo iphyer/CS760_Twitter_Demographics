@@ -12,8 +12,6 @@ import numpy as np # linear algebra
 import pandas as pd # data processing
 import datetime as dt
 
-
-
 ######################################################
 # read in data
 ######################################################
@@ -39,10 +37,8 @@ del userDataTime
 userDataAll['tweet_date'] =  pd.to_datetime(userDataAll['tweet_date'])
 userDataAll['tweet_time'] =  pd.to_datetime(userDataAll['tweet_time']).dt.strftime('%H:%M:%S')
 
-# extract user_id to make things simple
-#user_id_list = userFeature["user_id"].tolist()
 
-# Adding two empty column for recording
+# Adding 19 empty columns for recording
 
 # WeekDay
 
@@ -77,19 +73,48 @@ userFeature["freqDec"] = 0
 
 # Groupby user_id then apply the needed functions
 for row_index,row in userFeature.iterrows():
-   uid = row["user_id"]
-   tempDF = userDataAll.loc[userDataAll.user_id == uid]
-   totNum , _ = tempDF.shape
+    uid = row["user_id"]
+    tempDF = userDataAll.loc[userDataAll.user_id == uid]
+    totNum , _ = tempDF.shape
    # Counting Month Frequency
-   monSeries = tempDF.tweet_date.dt.strftime('%b').value_counts()
-   for mon in monSeries.index:
-       temp_str = 'freq' + mon
-       row[temp_str] = monSeries[mon] * 1.0 / totNum
+    monSeries = tempDF.tweet_date.dt.strftime('%b').value_counts()
+    for mon in monSeries.index:
+        temp_str = 'freq' + mon
+        userFeature.loc[row_index,temp_str] = monSeries[mon] * 1.0 / totNum
    # Counting WeekDay Frequency
    # weekday() 0 ~ 4 : Mon ~ Fri, 5 ~ 6 : Sat ~ Sun
-   tempDF['weekday'] = tempDF['tweet_date'].apply(lambda i: i.weekday() >= 4 )
-   weekdaySeries = tempDF['weekday'].value_counts()
-   row["freqWeekend"] = 1.0 * weekdaySeries[True] / totNum 
-   row["freqWeekDay"] = 1.0 * weekdaySeries[False] / totNum
+    tempDF['weekday'] = tempDF['tweet_date'].apply(lambda i: i.weekday() >= 4 )
+    weekdaySeries = tempDF['weekday'].value_counts()
+    for item in weekdaySeries:
+        if item == True:
+            userFeature.loc[row_index,"freqWeekend"] = 1.0 * weekdaySeries[True] / totNum
+        if item == False:
+            userFeature.loc[row_index,"freqWeekDay"] = 1.0 * weekdaySeries[False] / totNum
+
    # Counting DayTime
+    numMoring = 0
+    numNoon = 0
+    numAfternoon = 0
+    numNight = 0
+    numLateNight = 0
    
+    for temp_row_index, tempDFrow in tempDF.iterrows():
+        temp_time = dt.datetime.strptime(tempDFrow["tweet_time"], '%H:%M:%S').time()
+        if (temp_time >= dt.time(6,0,0)) and (temp_time < dt.time(12,0,0)):
+            numMoring += 1
+        if (temp_time >= dt.time(11,0,0)) and (temp_time < dt.time(14,0,0)):
+            numNoon += 1
+        if (temp_time >= dt.time(12,0,0)) and (temp_time < dt.time(18,0,0)):
+            numAfternoon += 1
+        if (temp_time >= dt.time(17,0,0)) and (temp_time < dt.time(23,0,0)):
+            numNight += 1
+        if (temp_time >= dt.time(23,0,0)) or (temp_time < dt.time(6,0,0)):
+            numLateNight += 1
+    userFeature.loc[row_index,"freqMoring"] = 1.0 * numMoring / totNum      # 6 ~ 12
+    userFeature.loc[row_index,"freqNoon"] = 1.0 * numNoon / totNum         # 11 ~ 14
+    userFeature.loc[row_index,"freqAfternoon"] = 1.0 * numAfternoon / totNum    # 12 ~ 18
+    userFeature.loc[row_index,"freqNight"] = 1.0 * numNight / totNum        # 17 ~ 23
+    userFeature.loc[row_index,"freqLateNight"] = 1.0 * numLateNight / totNum    # 22 ~ 6
+    print row_index
+
+userFeature.to_csv('louis_users_features_label_1203.csv', header=True)
