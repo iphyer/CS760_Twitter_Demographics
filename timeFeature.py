@@ -8,7 +8,6 @@ Created on Sun Dec  3 14:15:07 2017
 
 # import libarary needed
 
-import numpy as np # linear algebra
 import pandas as pd # data processing
 import datetime as dt
 
