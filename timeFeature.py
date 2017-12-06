@@ -84,7 +84,7 @@ for row_index,row in userFeature.iterrows():
    # weekday() 0 ~ 4 : Mon ~ Fri, 5 ~ 6 : Sat ~ Sun
     tempDF['weekday'] = tempDF['tweet_date'].apply(lambda i: i.weekday() >= 4 )
     weekdaySeries = tempDF['weekday'].value_counts()
-    for item in weekdaySeries:
+    for item in weekdaySeries.index:
         if item == True:
             userFeature.loc[row_index,"freqWeekend"] = 1.0 * weekdaySeries[True] / totNum
         if item == False:
@@ -116,4 +116,4 @@ for row_index,row in userFeature.iterrows():
     userFeature.loc[row_index,"freqLateNight"] = 1.0 * numLateNight / totNum    # 22 ~ 6
     print row_index
 
-userFeature.to_csv('louis_users_features_label_1203.csv', header=True)
+userFeature.to_csv('louis_users_features_label_1205.csv', header=True)
