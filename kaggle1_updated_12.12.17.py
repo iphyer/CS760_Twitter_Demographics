@@ -6,47 +6,30 @@
 
 import random
 import datetime
-import numpy as np # linear algebra
+
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
-# we'll want this for plotting
-import matplotlib.pyplot as plt
+
 
 # we'll want this for text manipulation
 import re
 
-# for quick and dirty counting
-from collections import defaultdict
+
 
 # the Naive Bayes model
 from sklearn.naive_bayes import MultinomialNB
 # function to split the data for cross-validation
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import ShuffleSplit
-# function for cross validation
-from sklearn.model_selection import cross_val_score
+
+
 # function for transforming documents into counts
 from sklearn.feature_extraction.text import CountVectorizer
 # function for encoding categories
 from sklearn.preprocessing import LabelEncoder
 
 
-# In[3]:
-
-
-# have to use latin1 even though it results in a lot of dead characters
-#import os
-# os.getcwd()
-
-
-# In[4]:
-
-
-twigen = pd.read_csv("louis_tweets_1127_labeled.csv", encoding='ISO-8859-1')
+twigen = pd.read_csv("data/louis_tweets_1127_labeled.csv", encoding='ISO-8859-1')
 twigen.head()
-
-
-# In[5]:
 
 
 def normalize_text(s):
@@ -66,9 +49,6 @@ def normalize_text(s):
     s = re.sub('http://.*',"", s)
     s = re.sub('\@.*?\ ', "", s)
     return s
-
-
-# In[6]:
 
 
 twigen['text_norm'] = [normalize_text(s) for s in twigen['content']]

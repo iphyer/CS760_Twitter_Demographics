@@ -57,7 +57,7 @@ scaler.fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
-mlp = MLPClassifier(activation='relu', alpha=1e-2,batch_size=5,hidden_layer_sizes=(100,100,100,100,100))
+mlp = MLPClassifier(learning_rate='adaptive',activation='logistic', alpha=1e-1,hidden_layer_sizes=(100,200,300,200,100))
 mlp.fit(X_train,y_train)
 
 predictions = mlp.predict(X_test)
@@ -79,7 +79,7 @@ print(classification_report(y_test,predictions))
 #clf.fit(x_train, y_train)                         
 #MLPClassifier(activation='logistic', alpha=1e-05, batch_size=10,
 #       beta_1=0.9, beta_2=0.999, early_stopping=False,
-#       epsilon=1e-08, hidden_layer_sizes=(5, 2), learning_rate='constant',
+#       epsilon=1e-08, hidden_layer_sizes=(5, 2), learning_rate='adaptive',
 #       learning_rate_init=0.001, max_iter=200, momentum=0.9,
 #       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
 #       solver='sgd', tol=0.0001, validation_fraction=0.1, verbose=False,
