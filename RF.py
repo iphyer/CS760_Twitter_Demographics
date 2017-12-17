@@ -37,20 +37,35 @@ import numpy as np
 # Set random seed
 np.random.seed(0)
 
-data_all = pd.read_csv("./data/louis_users_all_features_label_1207_updated.csv", encoding='ISO-8859-1')
+data_all = pd.read_csv("./data/louis_users_all_features_label_1213_addtext.csv", encoding='ISO-8859-1')
 
-instance_data = data_all[ ['freqWeekDay' ,'freqWeekend' ,'freqMoring' ,'freqNoon'
-      ,'freqAfternoon' ,'freqNight' ,'freqLateNight' ,'freqJan' ,'freqFeb' ,'freqMar' 
-      ,'freqApr' ,'freqMay','freqJun' ,'freqJul' ,'freqAug' ,'freqSep' ,'freqOct' 
-      ,'freqNov' ,'freqDec' ,'frequency_1','frequency_2' ,'frequency_3' ,'frequency_4' 
+#instance_data = data_all[ ['freqWeekDay' ,'freqWeekend' ,'freqMoring' ,'freqNoon'
+#      ,'freqAfternoon' ,'freqNight' ,'freqLateNight' ,'freqJan' ,'freqFeb' ,'freqMar' 
+#      ,'freqApr' ,'freqMay','freqJun' ,'freqJul' ,'freqAug' ,'freqSep' ,'freqOct' 
+#      ,'freqNov' ,'freqDec' ,'frequency_1','frequency_2' ,'frequency_3' ,'frequency_4' 
+#      ,'frequency_5' ,'frequency_6' ,'tralength_1_2' ,'tralength_1_3' ,'tralength_1_4'
+#      ,'tralength_1_5' ,'tralength_1_6' ,'tralength_2_3' ,'tralength_2_4' ,'tralength_2_5'
+#      ,'tralength_2_6' ,'tralength_3_4','tralength_3_5' ,'tralength_3_6' ,
+#      'tralength_4_5' ,'tralength_4_6' ,'tralength_5_6']]
+
+instance_data = data_all[ ['freqWeekDay','freqWeekend','freqMoring','freqNoon'
+      ,'freqNight','freqJan' ,'freqFeb' ,'freqMar' 
+      ,'freqMay','freqJun' ,'freqAug' ,'freqSep' ,'freqOct' 
+      ,'frequency_1','frequency_2' ,'frequency_4' 
       ,'frequency_5' ,'frequency_6' ,'tralength_1_2' ,'tralength_1_3' ,'tralength_1_4'
       ,'tralength_1_5' ,'tralength_1_6' ,'tralength_2_3' ,'tralength_2_4' ,'tralength_2_5'
-      ,'tralength_2_6' ,'tralength_3_4','tralength_3_5' ,'tralength_3_6' ,
-      'tralength_4_5' ,'tralength_4_6' ,'tralength_5_6']]
+      ,'tralength_2_6' ,'tralength_3_4','tralength_3_5' ,'tralength_3_6','tralength_4_5'
+      ,'tralength_4_6' ,'tralength_5_6','wtralength_1_2','wtralength_1_3','wtralength_1_4'
+      ,'wtralength_1_5','wtralength_1_6','wtralength_2_3','wtralength_2_4','wtralength_2_5'
+      ,'wtralength_2_6','wtralength_3_4','wtralength_3_5','wtralength_3_6','wtralength_4_5'
+      ,'wtralength_4_6','wtralength_5_6','O','M','F'] ]
+
+# deal with NA
+instance_data = instance_data.fillna(0)
 
 # adding the gender as the label 
-instance_data['gender']=data_all['gender']
-instance_data = instance_data.fillna(0)
+X = instance_data
+Y = data_all['gender']
 
 
 ######################################################
@@ -135,10 +150,6 @@ print(results.mean())
 # Voting Ensemble for Classification
 ######################################################
 
-
-array = instance_data.values
-X = array[:,0:39]
-Y = array[:,40]
 seed = 7
 kfold = model_selection.KFold(n_splits=10, random_state=seed)
 # create the sub models
