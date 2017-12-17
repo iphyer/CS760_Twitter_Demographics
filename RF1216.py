@@ -27,9 +27,7 @@ from sklearn.ensemble import VotingClassifier
 # Load numpy
 import numpy as np
 
-
-
-
+# In[1]:
 ######################################################
 # read in data
 ######################################################
@@ -67,23 +65,20 @@ instance_data = instance_data.fillna(0)
 X = instance_data
 Y = data_all['gender']
 
-
+# In[2]:
 ######################################################
 # Bagged Decision Trees for Classification
 ######################################################
 
-'''
-array = instance_data.values
-X = array[:,0:39]
-Y = array[:,40]
 seed = 7
-kfold = model_selection.KFold(n_splits=10, random_state=seed)
+kfold = model_selection.KFold(n_splits=5, random_state=seed)
 cart = DecisionTreeClassifier()
-num_trees = 100
+num_trees = 140
 model = BaggingClassifier(base_estimator=cart, n_estimators=num_trees, random_state=seed)
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
-'''
+
+# In[3]:
 ######################################################
 # Random Forest Classification
 ######################################################
@@ -99,6 +94,7 @@ model = RandomForestClassifier(n_estimators=num_trees, max_features=max_features
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
 '''
+# In[4]:
 ######################################################
 # Random Forest Classification
 ######################################################
