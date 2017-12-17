@@ -6,6 +6,7 @@ Created on Sun Dec 10 16:36:55 2017
 """
 # data processing, CSV file I/O (e.g. pd.read_csv)
 import pandas as pd 
+import numpy as np
 # function to split the data for cross-validation
 from sklearn.model_selection import train_test_split
 
@@ -49,14 +50,19 @@ y = data_all['gender']
 
 # In[5]:
 
-nb_data = data_all[ ['O','M','F'] ]
+#data_all['OO'] = data_all['O'].astype('float64')
+#data_all['MM'] = data_all['M'].astype('float64')
+#data_all['FF'] = data_all['F'].astype('float64')
+#nb_data = [data_all['OO'],data_all['MM'],data_all['FF']]
+nb_data = data_all[['O','M','F']]
+#nb_data = np.asfarray(nb_data0,float)
 nb_data['max'] = nb_data.idxmax(axis=1)
 print(confusion_matrix(y,nb_data['max']))
 print(classification_report(y,nb_data['max']))
 
 # In[6]:
 # split training and testing dateset
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # In[7]:
 scaler = StandardScaler()
