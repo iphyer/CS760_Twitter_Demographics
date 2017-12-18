@@ -5,8 +5,10 @@ Created on Sat Dec 16 21:19:03 2017
 
 @author: mingrenshen
 """
+from __future__ import print_function
 # data processing, CSV file I/O (e.g. pd.read_csv)
-import pandas as pd 
+import pandas as pd
+ 
 
 # time
 import time 
