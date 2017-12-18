@@ -25,6 +25,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import VotingClassifier
 
 # Load numpy
+
 import numpy as np
 
 # In[1]:
@@ -82,26 +83,19 @@ print(results.mean())
 ######################################################
 # Random Forest Classification
 ######################################################
-'''
-array = instance_data.values
-X = array[:,0:39]
-Y = array[:,40]
 seed = 0
 num_trees = 2000
-max_features = 10
+max_features = 50
 kfold = model_selection.KFold(n_splits=5, random_state=seed)
 model = RandomForestClassifier(n_estimators=num_trees, max_features=max_features)
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
-'''
+
 # In[4]:
 ######################################################
 # Random Forest Classification
 ######################################################
-'''
-array = instance_data.values
-X = array[:,0:39]
-Y = array[:,40]
+
 seed = 0
 num_trees = 100
 max_features = 7
@@ -109,14 +103,12 @@ kfold = model_selection.KFold(n_splits=10, random_state=seed)
 model = ExtraTreesClassifier(n_estimators=num_trees, max_features=max_features)
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
-'''
+
+# In[5]:
 ######################################################
 # AdaBoost Classification
 ######################################################
-'''
-array = instance_data.values
-X = array[:,0:39]
-Y = array[:,40]
+
 seed = 0
 num_trees = 100
 max_features = 7
@@ -124,24 +116,20 @@ kfold = model_selection.KFold(n_splits=10, random_state=seed)
 model = AdaBoostClassifier(n_estimators=num_trees, random_state=seed)
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
-'''
+
+# In[6]:
 ######################################################
 # Stochastic Gradient Boosting Classification
 ######################################################
 
-'''
-array = instance_data.values
-X = array[:,0:39]
-Y = array[:,40]
 seed = 7
 num_trees = 100
 kfold = model_selection.KFold(n_splits=10, random_state=seed)
 model = GradientBoostingClassifier(n_estimators=num_trees, random_state=seed)
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
-'''
 
-
+# In[7]:
 ######################################################
 # Voting Ensemble for Classification
 ######################################################
