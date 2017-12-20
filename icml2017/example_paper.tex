@@ -109,16 +109,17 @@
 \printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
 
 \begin{abstract} 
-The purpose of this document is to provide both the basic paper template and
-submission guidelines. Abstracts should be a single paragraph, between 4--6 sentences long, ideally.  Gross violations will trigger corrections at the camera-ready phase.
+
 \end{abstract} 
 
 
 \section{Introduction}
 
+Social media are popular platforms which can record a variety of users' personal information. Among this information, demographic characteristics \cite{sloan2013knowing} and space-time travel patterns \cite{hasan2013understanding} are two of great interesting areas to geographers. Demographic characteristics include gender, age, occupation and so on. Space-time travel patterns refer to the law of people's travel trajectories along both space and time (e.g., periodicity of visiting a restaurant, time of leaving home on weekdays). Traditionally, these two pieces of information are gathered from surveys and interviews \cite{chen2011exploratory}. As the Information and Communication Technology (ICT) develops, they can be mined from cell phone records and other electronic GPS records \cite{sila2016analysis}. However, these methods either cost too much money and too large resources or encroach privacy. Nowadays, social media data could take part in these works with little expense and free of privacy infringement \cite{preoctiuc2013mining}. Researchers have created robust framework and methodologies to mine space-time travel patterns from the geo-tagged online messages with temporal stamps. However, some direct demographic records(e.g., gender and occupation information on Twitter) is missing for some online platforms. It is important to design and implement methods to mine them from online messages \cite{rao2011hierarchical}. 
+
+It is important to restore user demographic information and link them with space-time travel patterns to unveil their relationships \cite{ahn2016gender}. The results indicate social segmentation and contribute to the development of public facilities for different subgroups \cite{ang2010analyzing}. However, few studies are conducted to investigate their relationships. Thus the travel patterns are discussed in terms of a general group of people, which is insufficient for human mobility studies because diverse travel patterns of different subgroups have been studied using other data sources \cite{kang2010analyzing}. To fill the research gap, this paper tries to develop a machine learning classifier to study the characteristic space-time travel pattern features of different subgroups, specifically different genders (male/female/others). Test results of our classifier are compared with an online word-based Bayes network classifier and a first-name-based classifier. Our classifier shows improvement in either test accuracy or in test F1 scores.  
 
 \section{Relate Work}
-\label{Realted}
 
 \subsection{Twitter Gender Inference}
 Automatically inferring user gender from Twitter is heavily investigated by both academic socitey and industry because gender is one of the most important demographic property of the user.  Generally, there are 3 main approaches used for deriving Twitter user’s gender information: (1) profile-based (2) content-based (3) hybrid \cite{beretta2015interactive}.
@@ -127,6 +128,25 @@ Automatically inferring user gender from Twitter is heavily investigated by both
 
 Profile-based methods use the meta-data of the user's account in Twitter to help determine the gender of the users \cite{sloan2015tweets}. In Twitter, a user can show his name, description, location, followers and friends publicly. Although Twitter does not check the authenticity of profile information, several studies have proven that most Twitter users provide their real name and real gender in their public profile \cite{cesare2017detection}. The simplest and best feature of profile information is users' first name. Previous studies have shown that by comparing name record from nation demographic survey, first name based gender classifier can achieve real good performance \cite{sloan2013knowing, mislove2011understanding} .There are several mature services like genderize.io and packages \footnote{\url{https://github.com/tue-mdse/genderComputer}} \footnote{\url{https://github.com/muatik/genderizer}} inferring gender using only first name. For example \url{genderize.io} provides API that can be used to determine gender of a first name with the help of a database contains 216286 distinct names across 79 countries and 89 languages.  Generally, the profile-based method is considered as the benchmark of gender inference due to the high efficacy it can achieve.  For example, Liu et al. use first name as the main feature to infer gender in Twitter and they obtain the accuracy around 85\% \cite{liu2013s}. 
 
+\subsubsection{Content-based Gender Inference}
+
+Content-based methods focus more on the content posted by Twitter users online. Twitter allows the users to post 140-character tweets(280-character  after Nov.7th, 2017 \footnote{\url{https://blog.twitter.com/official/en_us/topics/product/2017/Giving-you-more-characters-to-express-yourself.html}}) on their personal account. Early researches have proven that user of different genders have different word choices and writing styles. For example, Rao et al. tries to processes text generated by Twitter user to extract unigram and bigram features using a Support Vector Machine (SVM) algorithm to determine latent user attributes like gender information \cite{rao2010classifying}. Several other studies have been using similar n-gram features in combination with logistic and linear regression models to infer more demographic information of the user like gender \cite{burger2011discriminating}, age \cite{nguyen2013old, nguyen2013tweetgenie} ,politic attitudes \cite{pennacchiotti2011democrats}.
+
+In addition to n-grams features, stylistic features in Twitter text have also been used for user gender and other demographic information inference. For instance, several approaches describe methods to determine gender based on the usage of gender specific words like he, she or his, her, abbreviations, punctuation \cite{fink2012inferring}, smileys, repeated letters, pronouns, EMOJI \cite{wolf2000emotional} , hashtags and other grammatical features \cite{cheng2011author,ito2013he}.
+
+However, content based methods require background  and domain specific knowledge of natural language processing and can not be easily extended to other languages. Some studies have made some progresses on this direction but more efforts are needed \cite{mozetivc2016multilingual}.
+
+\subsubsection{Hybrid  Gender Inference}
+
+Hybrid approaches try to combine both profile based methods, content based methods and other source features or information to improve the accuracy of results. Many efforts have been devoted for this methods, for example,  Orlandi et al. tries to use information both from other sources like Facebook and Twitter to infer user profile \cite{orlandi2012aggregated}. Li et al. tries to use online social networks to help user identification in Twitter \cite{li2017solution}. Other directions like using hierarchical knowledge base \cite{kapanipathi2014user},  Twitter account the user following \cite{chamberlain2016probabilistic} or migration patterns \cite{zagheni2014inferring} etc.
+
+In this paper, we want to use the third approach, the hybrid method to infer the user gender information. To be more specific,  we want to combine Twitter users' mobility features like travel pattern with the content based information to design a new system to infer Twitter user gender. Previous studies have already shown that there are differences in Twitter user geo-temporal distribution between different genders \cite{graham2014world,mahmud2014home,weber2014visualizing, longley2016geo}. But few work has been done to utilize the geo-temporal feature of Twitter accounts to infer the gender information.
+
+\subsection{User Temporal and Spatial Travel Patterns}
+
+Human trajectories show a high degree of temporal and spatial regularity \cite{gonzalez2008understanding}. Two important statistical properties of such mobility patterns are displacement length (i.e., distance between a person's positions at consecutive locations) and radius of gyration (i.e., characteristic distance traveled by a person within a specific period of time)\cite{gonzalez2008understanding}. Besides, three kinds of entropy are  calculated to quantify the degree of predictability of a person's travel trajectories \cite{song2010limits}. Respectively, they measure location diversity, heterogeneity of visitation patterns along time and the full  temporal and spatial order of the person's mobility pattern. Moreover, the number of co-location records  are summarized within different time period to measure the size of the set of co-locations in social network studies \cite{cranshaw2010bridging}. 
+
+Although different variables characterizing detailed temporal and spatial travel patterns have been proposed , they are based on dense cell phone record data or verbose survey data. For the rising social media data,  temporal and spatial  travel patterns are usually visualized for interactive investigations \cite{yin2016exploring}, while lacking numeric parameters for further statistical analysis. Different from previous dense data study, social media data like Twitter is sparse, which only captures noncontinuous segments of users' travel trajectories. So it  is hard to get enough useful features from Twitter data. To use the travel patterns stored in social media data like Twitter, our project tries to design new temporal and spatial features to represent travel patterns and weigh their relative importance to the classifier through several tests.
 
 %\begin{center}
 %\textbf{\texttt{http://icml.cc/2017/}}
@@ -551,11 +571,13 @@ Profile-based methods use the meta-data of the user's account in Twitter to help
 % Acknowledgements should only appear in the accepted version. 
 \section*{Acknowledgements} 
 
-We would like to sincerely thank Prof. Liang, Depratment of Computer Science at UW-Madison, for valuable suggestions to implement this project and Prof. Huang, Department of Geography at UW-Madison, for the help of collecting Twitter data-set and annotations of user genders.
+We would like to sincerely thank Prof.Liang, Depratment of Computer Science at UW-Madison, for valuable suggestions to implement this project and Prof.Huang, Department of Geography at UW-Madison, for the help of collecting Twitter data-set and annotations of user genders.
 
 \subsection*{Software and Data}
 
-We provide all our data and program in Github and you can check them online \url{https://github.com/iphyer/cs760_TwitterDemographics}.  We mainly use scikit-learn \cite{scikit-learn} as our machine learning program library and processing data by Pandas \cite{mckinney2015pandas}.
+We provide all our data and program in Github and you can check them online \url{https://github.com/iphyer/cs760_TwitterDemographics}.
+
+We use scikit-learn \cite{scikit-learn} as our machine learning program library and Pandas \cite{mckinney2015pandas} for data processing.
 
 % In the unusual situation where you want a paper to appear in the
 % references without citing it in the main text, use \nocite
