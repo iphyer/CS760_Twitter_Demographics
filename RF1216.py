@@ -19,6 +19,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn import tree
 # Voting Ensemble
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
@@ -84,12 +85,17 @@ print(results.mean())
 # Random Forest Classification
 ######################################################
 seed = 0
-num_trees = 2000
-max_features = 50
+num_trees = 60
+max_features = 25
 kfold = model_selection.KFold(n_splits=5, random_state=seed)
 model = RandomForestClassifier(n_estimators=num_trees, max_features=max_features)
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
+#i_tree = 0
+#for tree_in_forest in model.estimators_:
+#    with open('tree_' + str(i_tree) + '.dot', 'w') as my_file:
+#        my_file = tree.export_graphviz(tree_in_forest, out_file = my_file)
+#    i_tree = i_tree + 1
 
 # In[4]:
 ######################################################

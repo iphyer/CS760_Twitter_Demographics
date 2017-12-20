@@ -38,9 +38,9 @@ from sklearn.metrics import classification_report,confusion_matrix
 
 # In[4]:
 
-data_train = pd.read_csv("./data/trainset.csv", encoding='ISO-8859-1')
-data_test = pd.read_csv("./data/testset.csv", encoding='ISO-8859-1')
-data_all = pd.read_csv("./data/louis_users_all_features_label_1217_addtext.csv", encoding='ISO-8859-1')
+data_train = pd.read_csv("./data/trainset_6.csv", encoding='ISO-8859-1')
+data_test = pd.read_csv("./data/testset_6.csv", encoding='ISO-8859-1')
+data_all = pd.read_csv("./data/louis_users_all_features_label_1217_addtext_addname_6.csv", encoding='ISO-8859-1')
 #data_all['OO'] = data_all['O'].astype(float)
 #data_all['MM'] = data_all['M'].astype(float)
 #data_all['FF'] = data_all['F'].astype(float)
@@ -59,7 +59,7 @@ data_all = pd.read_csv("./data/louis_users_all_features_label_1217_addtext.csv",
 #      ,'wtralength_2_6','wtralength_3_4','wtralength_3_5','wtralength_3_6','wtralength_4_5'
 #      ,'wtralength_4_6','wtralength_5_6','O','F','M'] ]
 
-instance_data = data_all[ ['freqWeekDay' ,'freqWeekend' ,'freqMoring' ,'freqNoon'
+instance_data = data_all[ ['user_key','freqWeekDay' ,'freqWeekend' ,'freqMoring' ,'freqNoon'
       ,'freqAfternoon' ,'freqNight' ,'freqLateNight' ,'freqJan' ,'freqFeb' ,'freqMar' 
       ,'freqApr' ,'freqMay','freqJun' ,'freqJul' ,'freqAug' ,'freqSep' ,'freqOct' 
       ,'freqNov' ,'freqDec' ,'frequency_1','frequency_2' ,'frequency_3' ,'frequency_4' 
@@ -84,27 +84,49 @@ X_train = instance_data[instance_data['user_key'].isin(train_index)]
 X_test = instance_data[instance_data['user_key'].isin(test_index)]
 Y_train = Y[Y['user_key'].isin(train_index)]
 Y_test = Y[Y['user_key'].isin(test_index)]
+x_train = X_train[['freqWeekDay' ,'freqWeekend' ,'freqMoring' ,'freqNoon'
+      ,'freqAfternoon' ,'freqNight' ,'freqLateNight' ,'freqJan' ,'freqFeb' ,'freqMar' 
+      ,'freqApr' ,'freqMay','freqJun' ,'freqJul' ,'freqAug' ,'freqSep' ,'freqOct' 
+      ,'freqNov' ,'freqDec' ,'frequency_1','frequency_2' ,'frequency_3' ,'frequency_4' 
+      ,'frequency_5' ,'frequency_6' ,'tralength_1_2' ,'tralength_1_3' ,'tralength_1_4'
+      ,'tralength_1_5' ,'tralength_1_6' ,'tralength_2_3' ,'tralength_2_4' ,'tralength_2_5'
+      ,'tralength_2_6' ,'tralength_3_4','tralength_3_5' ,'tralength_3_6'
+      ,'tralength_4_5' ,'tralength_4_6' ,'tralength_5_6','wtralength_1_2','wtralength_1_3'
+      ,'wtralength_1_4','wtralength_1_5','wtralength_1_6','wtralength_2_3','wtralength_2_4'
+      ,'wtralength_2_5','wtralength_2_6','wtralength_3_4','wtralength_3_5','wtralength_3_6'
+      ,'wtralength_4_5','wtralength_4_6','wtralength_5_6','O','F','M']]
+x_test = X_test[['freqWeekDay' ,'freqWeekend' ,'freqMoring' ,'freqNoon'
+      ,'freqAfternoon' ,'freqNight' ,'freqLateNight' ,'freqJan' ,'freqFeb' ,'freqMar' 
+      ,'freqApr' ,'freqMay','freqJun' ,'freqJul' ,'freqAug' ,'freqSep' ,'freqOct' 
+      ,'freqNov' ,'freqDec' ,'frequency_1','frequency_2' ,'frequency_3' ,'frequency_4' 
+      ,'frequency_5' ,'frequency_6' ,'tralength_1_2' ,'tralength_1_3' ,'tralength_1_4'
+      ,'tralength_1_5' ,'tralength_1_6' ,'tralength_2_3' ,'tralength_2_4' ,'tralength_2_5'
+      ,'tralength_2_6' ,'tralength_3_4','tralength_3_5' ,'tralength_3_6'
+      ,'tralength_4_5' ,'tralength_4_6' ,'tralength_5_6','wtralength_1_2','wtralength_1_3'
+      ,'wtralength_1_4','wtralength_1_5','wtralength_1_6','wtralength_2_3','wtralength_2_4'
+      ,'wtralength_2_5','wtralength_2_6','wtralength_3_4','wtralength_3_5','wtralength_3_6'
+      ,'wtralength_4_5','wtralength_4_6','wtralength_5_6','O','F','M']]
 y_train = Y_train['gender']
 y_test = Y_test['gender']
 
 # In[5]:
 seed = 0
-num_trees = 40
-max_features = 30
-#kfold = model_selection.KFold(n_splits=15, random_state=seed)
-model = RandomForestClassifier(n_estimators=num_trees, max_depth=20, random_state=seed, max_features=max_features)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
+num_trees = 20
+max_features = 22
+max_depth = 13
 
+model = RandomForestClassifier(n_estimators=num_trees, max_depth=max_depth, random_state=seed, max_features=max_features)
+model.fit(x_train, y_train)
+predictions = model.predict(x_test)
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
 
-i_tree = 0
-for tree_in_forest in model.estimators_:
-    with open('tree_' + str(i_tree) + '.dot', 'w') as my_file:
-        dot_data = tree.export_graphviz(tree_in_forest, out_file = my_file,
-                                        filled=True, rounded=True, special_characters=True)
-    i_tree = i_tree + 1
+#i_tree = 0
+#for tree_in_forest in model.estimators_:
+#    with open('tree_' + str(i_tree) + '.dot', 'w') as my_file:
+#        dot_data = tree.export_graphviz(tree_in_forest, out_file = my_file,
+#                                        filled=True, rounded=True, special_characters=True)
+#    i_tree = i_tree + 1
 
 # In[ ]:
 os.system('dot -Tpng tree_3.dot -o tree_3.png')
@@ -113,107 +135,76 @@ os.system('dot -Tpng tree_5.dot -o tree_5.png')
 
 # In[ ]:
 seed = 7
+max_depth = 2
+max_features = 17
 #kfold = model_selection.KFold(n_splits=5, random_state=seed)
-cart = DecisionTreeClassifier()
-num_trees = 140
+cart = DecisionTreeClassifier(max_depth = max_depth, max_features = max_features)
+num_trees = 3
 model = BaggingClassifier(base_estimator=cart, n_estimators=num_trees, random_state=seed)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
+model.fit(x_train, y_train)
+predictions = model.predict(x_test)
 
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
 
 # In[ ]:
 seed = 0
-num_trees = 100
-max_features = 7
-model = ExtraTreesClassifier(n_estimators=num_trees, max_features=max_features)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
+num_trees = 5
+max_features = 8
+max_depth = 9
+model = ExtraTreesClassifier(n_estimators=num_trees, max_features=max_features, max_depth = max_depth)
+model.fit(x_train, y_train)
+predictions = model.predict(x_test)
 
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
 
 # In[ ]:
 seed = 0
-num_trees = 100
-max_features = 7
+num_trees = 3
 model = AdaBoostClassifier(n_estimators=num_trees, random_state=seed)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
+model.fit(x_train, y_train)
+predictions = model.predict(x_test)
 
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
 
 # In[ ]:
 seed = 0
-num_trees = 100
-max_features = 7
+num_trees = 5
 model = GradientBoostingClassifier(n_estimators=num_trees, random_state=seed)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
+model.fit(x_train, y_train)
+predictions = model.predict(x_test)
 
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
-
-# In[ ]:
-
-mlp = MLPClassifier(activation='relu', alpha=1e-3, batch_size=7, hidden_layer_sizes=(30,10,5,5),
-                    learning_rate_init=0.002, max_iter=1200, shuffle=True, solver='lbfgs')
-mlp.fit(X_train,y_train)
-
-predictions = mlp.predict(X_test)
-
-print(confusion_matrix(y_test,predictions))
-print(classification_report(y_test,predictions))
-
-# In[ ]:
-
-#nb_data = [data_all['OO'],data_all['MM'],data_all['FF']]
-nb_data = data_all[['OO','MM','FF']]
-name_test = nb_data[nb_data['user_key'].isin(test_index)]
-#nb_data = np.asfarray(nb_data0,float)
-name_test['max'] = name_test.idxmax(axis=1)
-print(confusion_matrix(y_test,name_test['max']))
-print(classification_report(y_test,name_test['max']))
-
-# In[6]:
-# split training and testing dateset
-#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # In[7]:
 scaler = StandardScaler()
 # Fit only to the training data
-scaler.fit(X_train)
+scaler.fit(x_train)
 
 # Now apply the transformations to the data:
-X_train = scaler.transform(X_train)
-X_test = scaler.transform(X_test)
+x_train = scaler.transform(x_train)
+x_test = scaler.transform(x_test)
 
-# In[8]:
-mlp = MLPClassifier(activation='relu', alpha=1e-3, batch_size=1, hidden_layer_sizes=(35,20,20,5),
-                    learning_rate_init=0.002, max_iter=1200, shuffle=True, solver='lbfgs')
-mlp.fit(X_train,y_train)
+# In[ ]:
+mlp = MLPClassifier(activation='relu', alpha=1e-3, batch_size=5, hidden_layer_sizes=(10,5,5,3),
+                    learning_rate_init=0.001, max_iter=1500, shuffle=True, solver='lbfgs')
+mlp.fit(x_train,y_train)
 
-predictions = mlp.predict(X_test)
+predictions = mlp.predict(x_test)
 
 print(confusion_matrix(y_test,predictions))
 print(classification_report(y_test,predictions))
-#
-#for index, row in df.iterrows():
-## for x in df[:]:
-#    X.append(row.tolist())
 
-#clf = MLPClassifier(solver='sgd', alpha=0.0001, hidden_layer_sizes=(5, 2), random_state=1)
-
-#clf.fit(x_train, y_train)                         
-#MLPClassifier(activation='logistic', alpha=1e-05, batch_size=10,
-#       beta_1=0.9, beta_2=0.999, early_stopping=False,
-#       epsilon=1e-08, hidden_layer_sizes=(5, 2), learning_rate='constant',
-#       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-#       nesterovs_momentum=True, power_t=0.5, random_state=1, shuffle=True,
-#       solver='sgd', tol=0.0001, validation_fraction=0.1, verbose=False,
-#       warm_start=False)
-
-#clf.predict(x_train)
-
+# In[ ]:
+#nb_data = [data_all['OO'],data_all['MM'],data_all['FF']]
+nb_data = data_all[['user_key','O','M','F']]
+name_test = nb_data[nb_data['user_key'].isin(test_index)]
+name_test = name_test[['O','M','F']]
+name_test["F"] = pd.to_numeric(name_test["F"])
+#nb_data = np.asfarray(nb_data0,float)
+name_test['max'] = name_test.idxmax(axis=1)
+print(confusion_matrix(y_test,name_test['max']))
+print(classification_report(y_test,name_test['max']))
