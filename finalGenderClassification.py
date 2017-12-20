@@ -10,7 +10,7 @@ import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
 # we'll want this for plotting
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 # we'll want this for text manipulation
 import re
@@ -44,7 +44,7 @@ from scipy.sparse import coo_matrix, vstack
 # In[4]:
 
 
-twigen = pd.read_csv("louis_tweets_1127_labeled.csv", encoding='ISO-8859-1')
+twigen = pd.read_csv("./data/louis_tweets_1127_labeled.csv", encoding='ISO-8859-1')
 twigen.head()
 
 

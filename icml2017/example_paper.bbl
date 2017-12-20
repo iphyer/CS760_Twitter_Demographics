@@ -1,0 +1,67 @@
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Beretta et~al.(2015)Beretta, Maccagnola, Cribbin, and
+  Messina]{beretta2015interactive}
+Beretta, Valentina, Maccagnola, Daniele, Cribbin, Timothy, and Messina, Enza.
+\newblock An interactive method for inferring demographic attributes in
+  twitter.
+\newblock In \emph{Proceedings of the 26th ACM Conference on Hypertext \&
+  Social Media}, pp.\  113--122. ACM, 2015.
+
+\bibitem[Cesare et~al.(2017)Cesare, Grant, and Nsoesie]{cesare2017detection}
+Cesare, Nina, Grant, Christan, and Nsoesie, Elaine~O.
+\newblock Detection of user demographics on social media: A review of methods
+  and recommendations for best practices.
+\newblock \emph{arXiv preprint arXiv:1702.01807}, 2017.
+
+\bibitem[Liu \& Ruths(2013)Liu and Ruths]{liu2013s}
+Liu, Wendy and Ruths, Derek.
+\newblock What's in a name? using first names as features for gender inference
+  in twitter.
+\newblock In \emph{AAAI spring symposium: Analyzing microtext}, volume~13, pp.\
+  ~01, 2013.
+
+\bibitem[McKinney(2015)]{mckinney2015pandas}
+McKinney, Wes.
+\newblock pandas: a python data analysis library.
+\newblock \emph{see http://pandas. pydata. org}, 2015.
+
+\bibitem[Mislove et~al.(2011)Mislove, Lehmann, Ahn, Onnela, and
+  Rosenquist]{mislove2011understanding}
+Mislove, Alan, Lehmann, Sune, Ahn, Yong-Yeol, Onnela, Jukka-Pekka, and
+  Rosenquist, J~Niels.
+\newblock Understanding the demographics of twitter users.
+\newblock \emph{ICWSM}, 11:\penalty0 5th, 2011.
+
+\bibitem[Pedregosa et~al.(2011)Pedregosa, Varoquaux, Gramfort, Michel, Thirion,
+  Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos,
+  Cournapeau, Brucher, Perrot, and Duchesnay]{scikit-learn}
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel,
+  O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J.,
+  Passos, A., Cournapeau, D., Brucher, M., Perrot, M., and Duchesnay, E.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock \emph{Journal of Machine Learning Research}, 12:\penalty0 2825--2830,
+  2011.
+
+\bibitem[Sloan et~al.(2013)Sloan, Morgan, Housley, Williams, Edwards, Burnap,
+  and Rana]{sloan2013knowing}
+Sloan, Luke, Morgan, Jeffrey, Housley, William, Williams, Matthew, Edwards,
+  Adam, Burnap, Pete, and Rana, Omer.
+\newblock Knowing the tweeters: Deriving sociologically relevant demographics
+  from twitter.
+\newblock \emph{Sociological research online}, 18\penalty0 (3):\penalty0 7,
+  2013.
+
+\bibitem[Sloan et~al.(2015)Sloan, Morgan, Burnap, and
+  Williams]{sloan2015tweets}
+Sloan, Luke, Morgan, Jeffrey, Burnap, Pete, and Williams, Matthew.
+\newblock Who tweets? deriving the demographic characteristics of age,
+  occupation and social class from twitter user meta-data.
+\newblock \emph{PloS one}, 10\penalty0 (3):\penalty0 e0115545, 2015.
+
+\end{thebibliography}
