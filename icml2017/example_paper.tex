@@ -257,6 +257,173 @@ Naive Bayes network is based on Bayes Theorem which is shown in Fig. \ref{fig2}.
 After getting gender confidence from naive Bayes network and combing this feature with 55 spatial and temporal features, we finally decided to use Random Forest to predict the final label of each user'  gender. Random Forest classification method was chosen because it could perform classification on high dimensional space by randomized feature selection approach\cite{breiman2001random}.  We have tested different methods based on our data, Random forest outperformed other methods like Neural network, Ada boosting and decision tree which agreed with other studies \cite{liaw2002classification}. In short, Random Forest is a form of "ensemble learning" where the algorithm generates a large number of not pruned decision trees and then summarize the results from each decision tree \cite{breiman2001random}. This means it can provide more accurate predictions with smaller sample sizes and becomes less susceptible to over-fitting and other problems in other classifiers. Therefore, we used the Random Forest functions \footnote{\url{http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}} provided by Scikit-learn and trained the Random Forest classifier with 30 maximum features and 60 allowed sub-trees \cite{scikit-learn}.
 
 \section{Results}
+To better test our model and features, we randomly divide the whole data set into development data set(2400 users) and test data set(122 users). For the development stage, And we use 5-fold stratified cross validation to test our model for development stage. Specifically, the 2400 Twitter users are divided into development training set and development testing set. We use development testing set to help choose the best parameters for each model.
+
+After we get the fully developed model, we use the test data set which is not used in development stage to test the accuracy of each model. And to better ensure the accuracy, we do the test of accuracy 5 times for each model. For each test Precision, Recall and F1-score are present.
+
+\subsection{Accuracy} 
+
+First, we present the accuracy result for content-based Naive Bayes Network as shown in Table. \ref{tab1} 
+
+\begin{table}[tp]
+\centering
+\caption{Accuracy Table of Content-Based Naive Bayes Network}
+\label{tab1}
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{llll}
+Experiment & Precision & Recall & F1-score \\ \hline
+1          & 0.67      & 0.7    & 0.68     \\
+2          & 0.72      & 0.73   & 0.72     \\
+3          & 0.71      & 0.7    & 0.71     \\
+4          & 0.72      & 0.72   & 0.72     \\
+5          & 0.69      & 0.69   & 0.69     \\  \hline
+Ave.       & 0.71      & 0.71   & 0.71   
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\end{table}
+
+We can see that content-based Naive Bayes Network achieve an accuracy of 71 \%.
+
+Secondly, we combine gender confidence given by naive Bayes network and travel pattern features to calculate Precision, Recall and F1-score again with different model.  All data are averaged 5 times.
+
+\begin{table}[tp]
+\centering
+\caption{Performance Table of Combination of all feature with different models}
+\label{tab2}
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{llll}
+Methods                    & Precision & Recall & F1-score \\ \hline
+Random Forest              & \textbf{0.720}      & 0.725  & 0.720     \\
+Decision Tree              & 0.715     & 0.733  & 0.723    \\
+Extra Tree                 & 0.713     & 0.718  & 0.717    \\
+AdaBoost Tree              & 0.718     & 0.725  & 0.718    \\
+Gradient Boosting Tree     & 0.715     & 0.713  & 0.710     \\
+Multi-layer Neural Network & 0.688     & 0.708  & 0.695   
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\end{table}
+
+
+Apparently from Table. \ref{tab2},   we can find that,  after combining words and spatial and temporal features, precision, recall and F1-score increases for most models except multi-layer Neural Network which may need more parameter tuning before really achieving a good results.
+
+To further test our method with the benchmark gender inference method using the first name as the vital feature for the inference and the result is shown in Table. \ref{tab3}.
+
+\begin{table*}[tp]
+\centering
+\caption{Performance Table of Random Forest with all features and first name based methods}
+\label{tab3}
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{llll}
+Methods                                     & Precision & Recall & F1-score \\
+First name based                            & 0.898     & 0.785  & 0.832    \\
+Random Forest with all features & 0.8230     & 0.835  & 0.830   
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\end{table*}
+
+We can see that although our model is not better than benchmark method, the difference is small.  And out method does not require that first name must be provided by the user, which is helpful when first name is not provided or the field is not true. And we can see our method can be easily integrated with other methods.
+
+\subsection{Spatial and Temporal Feature Importance}
+As said above, our spatial and temporal feature are easily integrated with other methods, so here we want to show that adding spatial and temporal features can really improve the performance of both profile-based method(first name) and content-based methods. For this part, from the method above, we tried to  combine all spatial and temporal features with profile-based method and content-based method and output the relative importance of this feature in Random Forest. We only showed the top 10 important spatial and temporal features in Table. \ref{tab4} and Table. \ref{tab5}.
+
+\begin{table}[tp]
+\centering
+\caption{Top 10 important spatial and temporal features for profile-based method(first name) }
+\label{tab4}
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{ll}
+Feature Name & Importance \\ \hline
+Confidence of gender M by first name & 0.3395		\\
+Confidence of gender F by first name&  0.2683		\\
+Confidence of gender O by first name&  0.0154 	\\
+Frequency in May & 0.0195		\\
+Frequency of stay at home & 0.0188 \\
+Frequency on weekends & 0.0172		\\
+Frequency at night &  0.0168		\\
+Frequency at late night & 0.0167\\		
+Frequency at afternoon & 0.0167	\\	
+Frequency on weekdays & 0.0161		
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\end{table}
+
+
+\begin{table}[tp]
+\centering
+\caption{Top 10 important spatial and temporal features for content-based method}
+\label{tab5}
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{ll}
+Feature Name & Importance \\ \hline
+Confidence of gender M by content & 0.4395 \\
+Confidence of gender F by content & 0.2890 \\
+Confidence of gender O by content & 0.0182 \\
+Frequency on weekends& 0.0132 \\
+Frequency at afternoon& 0.0120 \\
+Frequency of stay at home&0.0119 \\
+Frequency at night& 0.0109 \\
+Frequency at late night&0.1082 \\
+Frequency on weekdays&0.0094 \\
+Frequency of commuting&0.0091 \\
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\end{table}
+
+As is illustrated above, the confidences derived by first-name-based classifier or content based classifier contribute the most to gender classification. Aside from them, several spatial and temporal features were found to slightly improve the classification performance. They are frequency in May, frequency of stay at home, frequency on weekends, frequency at night, frequency at late night, frequency at afternoon, frequency on weekdays and frequency of commuting.
+
+\subsection{Geo-Gender Map}
+Due to time limit, we do not fully utilize the gender information we get for the Twitter users. However, here we show one usage of the obtained gender information in Fig. \ref{fig3}.
+
+\begin{figure}[ht]
+\vskip 0.2in
+\begin{center}
+\centerline{\includegraphics[width=\columnwidth]{fig3}}
+\caption{Gender Geo-Distribution of St Louis Tweets}
+\label{fig3}
+\end{center}
+\vskip -0.2in
+\end{figure} 
+
+Although it is hard to see any potential usage of  Fig. \ref{fig3}, it does show some gender features of St Louis which can be used by local government or  police department to  help the development of St Louis.
+
+The final Random Forest model is shown in Appendix. 
+
+\section{Discussion}
+
+As shown in Table. \ref{tab2}, with the help of spatial and temporal features  to the content mining classifier, precision, recall and F1-score obviously increase under all the models except for Multi-layer Neural Network. We can conclude that travel pattern features works well and contribute positively to gender classification. As for the bad performance on Multi-layer Neural Network, it might result from that we did not acquire proper parameters for it. As shown in table 3, after adding spatial and temporal features to the first-name-based classifier, prediction recall gets clearly improved while the precision decreases. F1-scores of there two methods are nearly the same. It can be said that although our model does not predict as accurate as first name based model, we can get correct prediction within less attempt. And similar F1-scores indicted these two model have similar performance.
+
+
+Compared with the gender classification based on users' first name, which generally gives a quite good result, our classification method shows a close performance. We cannot obtain users' first name correctly in some situations and it impedes the application of gender classification based on users' first name. However, we can get users' typical words from their contents quite conveniently and give a relatively high accuracy of gender classification with our model.
+
+Word-embedding model is used in naive Bayes network, in which we count the frequency for different word types and construct a word table for that. With the word table we calculate different probabilities for gender types under the condition of these words and give gender confidences. However, one problem is that when classify tweet with the words out of the word table, something has to be done to include these words. To figure this problem we first extend the word table with the new words and then train the naive Bayes network again with the new word table. By using this method our word table becomes larger and larger and the chance to extend the word table becomes smaller and smaller. If the sample data set is large enough we will get a perfect dictionary for content classification. However, this needs more efforts on NLP related area.
+
+\section{Conclusions}
+
+Content method to process word content gives good results of gender classification of twitter users. Our model combines naive Bayes network and spatial and temporal features to predict Twitter user's gender. It further increases the performance of gender classification. Compared with users' first name gender classification, our model shows a close performance and has less restrictions in application.
+
+In future, we will try to use larger data set with denser sampling of users' geographic locations. Then more accurate spatial and temporal features could be obtained and the performance of our model would be much further improved. 
+
+
 
 %\begin{center}
 %\textbf{\texttt{http://icml.cc/2017/}}
