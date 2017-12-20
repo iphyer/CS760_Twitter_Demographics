@@ -1,4 +1,4 @@
-\begin{thebibliography}{38}
+\begin{thebibliography}{41}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,7 +12,8 @@ Ahn, Young-joo, Wooten, Dr, Marian, H, Norman, Dr, William, C, McGuire, Dr,
 \newblock Gender differences in travel constraints and changed travel pattern
   after a senior travel program introduces: A case study of the florence county
   senior travel program.
-\newblock 2016.
+\newblock \emph{Tourism Travel and Research Association: Advancing Tourism
+  Research Globally}, 37, 2016.
 
 \bibitem[Beretta et~al.(2015)Beretta, Maccagnola, Cribbin, and
   Messina]{beretta2015interactive}
@@ -58,6 +59,13 @@ Cheng, Na, Chandramouli, Rajarathnam, and Subbalakshmi, KP.
 \newblock Author gender identification from text.
 \newblock \emph{Digital Investigation}, 8\penalty0 (1):\penalty0 78--88, 2011.
 
+\bibitem[Cheng et~al.(2010)Cheng, Caverlee, and Lee]{cheng2010you}
+Cheng, Zhiyuan, Caverlee, James, and Lee, Kyumin.
+\newblock You are where you tweet: a content-based approach to geo-locating
+  twitter users.
+\newblock In \emph{Proceedings of the 19th ACM international conference on
+  Information and knowledge management}, pp.\  759--768. ACM, 2010.
+
 \bibitem[Cranshaw et~al.(2010)Cranshaw, Toch, Hong, Kittur, and
   Sadeh]{cranshaw2010bridging}
 Cranshaw, Justin, Toch, Eran, Hong, Jason, Kittur, Aniket, and Sadeh, Norman.
@@ -84,6 +92,13 @@ Graham, Mark, Hale, Scott~A, and Gaffney, Devin.
   in twitter.
 \newblock \emph{The Professional Geographer}, 66\penalty0 (4):\penalty0
   568--578, 2014.
+
+\bibitem[Hansen et~al.(2011)Hansen, Arvidsson, Nielsen, Colleoni, and
+  Etter]{hansen2011good}
+Hansen, Lars~Kai, Arvidsson, Adam, Nielsen, Finn~{\AA}rup, Colleoni, Elanor,
+  and Etter, Michael.
+\newblock Good friends, bad news-affect and virality in twitter.
+\newblock \emph{Future information technology}, pp.\  34--43, 2011.
 
 \bibitem[Hasan et~al.(2013)Hasan, Zhan, and Ukkusuri]{hasan2013understanding}
 Hasan, Samiul, Zhan, Xianyuan, and Ukkusuri, Satish~V.
@@ -209,6 +224,11 @@ Preo{\c{t}}iuc-Pietro, Daniel and Cohn, Trevor.
   based social networks.
 \newblock In \emph{Proceedings of the 5th Annual ACM Web Science Conference},
   pp.\  306--315. ACM, 2013.
+
+\bibitem[QGIS(2015)]{qgis2015qgis}
+QGIS, DT.
+\newblock Qgis geographic information system. open source geospatial foundation
+  project, 2015.
 
 \bibitem[Rao et~al.(2010)Rao, Yarowsky, Shreevats, and
   Gupta]{rao2010classifying}

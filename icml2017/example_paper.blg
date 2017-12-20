@@ -3,51 +3,49 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: example_paper.aux
 The style file: icml2017.bst
 Database file #1: example_paper.bib
-Repeated entry---line 243 of file example_paper.bib
+Repeated entry---line 287 of file example_paper.bib
  : @inproceedings{kang2010analyzing
  :                                 ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "ang2010analyzing"
-Warning--empty journal in ahn2016gender
-You've used 38 entries,
+You've used 41 entries,
             2773 wiz_defined-function locations,
-            805 strings with 13130 characters,
-and the built_in function-call counts, 22066 in all, are:
-= -- 1942
-> -- 1512
-< -- 23
-+ -- 507
-- -- 468
-* -- 1888
-:= -- 3321
-add.period$ -- 127
-call.type$ -- 38
-change.case$ -- 268
-chr.to.int$ -- 37
-cite$ -- 77
-duplicate$ -- 956
-empty$ -- 1651
-format.name$ -- 516
-if$ -- 4690
+            819 strings with 13735 characters,
+and the built_in function-call counts, 23649 in all, are:
+= -- 2089
+> -- 1600
+< -- 26
++ -- 537
+- -- 495
+* -- 2004
+:= -- 3549
+add.period$ -- 136
+call.type$ -- 41
+change.case$ -- 286
+chr.to.int$ -- 40
+cite$ -- 82
+duplicate$ -- 1032
+empty$ -- 1780
+format.name$ -- 546
+if$ -- 5040
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 38
-newline$ -- 198
-num.names$ -- 152
-pop$ -- 555
+missing$ -- 40
+newline$ -- 212
+num.names$ -- 164
+pop$ -- 595
 preamble$ -- 1
-purify$ -- 230
+purify$ -- 245
 quote$ -- 0
-skip$ -- 764
+skip$ -- 831
 stack$ -- 0
-substring$ -- 804
-swap$ -- 177
-text.length$ -- 16
+substring$ -- 866
+swap$ -- 198
+text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 418
-warning$ -- 1
-while$ -- 180
+type$ -- 451
+warning$ -- 0
+while$ -- 195
 width$ -- 0
-write$ -- 508
+write$ -- 547
 (There was 1 error message)
