@@ -7,45 +7,45 @@ Repeated entry---line 287 of file example_paper.bib
  : @inproceedings{kang2010analyzing
  :                                 ,
 I'm skipping whatever remains of this entry
-You've used 41 entries,
+You've used 43 entries,
             2773 wiz_defined-function locations,
-            819 strings with 13735 characters,
-and the built_in function-call counts, 23649 in all, are:
-= -- 2089
-> -- 1600
-< -- 26
-+ -- 537
-- -- 495
-* -- 2004
-:= -- 3549
-add.period$ -- 136
-call.type$ -- 41
-change.case$ -- 286
-chr.to.int$ -- 40
-cite$ -- 82
-duplicate$ -- 1032
-empty$ -- 1780
-format.name$ -- 546
-if$ -- 5040
+            832 strings with 13929 characters,
+and the built_in function-call counts, 24491 in all, are:
+= -- 2167
+> -- 1639
+< -- 27
++ -- 551
+- -- 507
+* -- 2074
+:= -- 3680
+add.period$ -- 142
+call.type$ -- 43
+change.case$ -- 295
+chr.to.int$ -- 42
+cite$ -- 86
+duplicate$ -- 1073
+empty$ -- 1856
+format.name$ -- 560
+if$ -- 5214
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 40
-newline$ -- 212
-num.names$ -- 164
-pop$ -- 595
+missing$ -- 42
+newline$ -- 222
+num.names$ -- 172
+pop$ -- 610
 preamble$ -- 1
-purify$ -- 245
+purify$ -- 252
 quote$ -- 0
-skip$ -- 831
+skip$ -- 859
 stack$ -- 0
-substring$ -- 866
-swap$ -- 198
+substring$ -- 905
+swap$ -- 200
 text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 451
+type$ -- 473
 warning$ -- 0
-while$ -- 195
+while$ -- 205
 width$ -- 0
-write$ -- 547
+write$ -- 573
 (There was 1 error message)
